@@ -30,11 +30,13 @@ public class Menu_Principal extends JFrame {
 
         // Agregar eventos a los botones
         btnModoManual.addActionListener(e -> {
-            new ModoManual(); // abrir el modo manual
+            new ModoManual();// abrir el modo manual
+            setVisible(false); //esconde el menu
         });
 
         btnModoInteligente.addActionListener(e -> {
             new ModoInteligente();
+            setVisible(false); //esconde el menu
         });
 
         btnPuntuaciones.addActionListener(e -> {
@@ -51,8 +53,8 @@ public class Menu_Principal extends JFrame {
         panel.add(btnPuntuaciones);
         panel.add(btnSalir);
 
-        add(panel);         //Coloca el panel en la ventana
-        setVisible(true);   //La muestra para el usuario
+        add(panel);//Coloca el panel en la ventana
+        setVisible(true); //Muestra el menu
     }
     // Inicio del programa
     public static void main(String[] args) {

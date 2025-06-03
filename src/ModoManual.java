@@ -9,7 +9,7 @@ import java.util.ArrayList;         // ""
 import java.util.Arrays;            // para comparar los tableros
 
 
-public class ModoManual extends JFrame { //ventana donde se mostrará el modo manual
+public class ModoManual extends JFrame {
     private JButton[][] botones = new JButton[3][3]; //arreglo 3x3 para las fichas
     private int[][] tablero = {
             {1, 2, 3},
@@ -19,6 +19,7 @@ public class ModoManual extends JFrame { //ventana donde se mostrará el modo ma
 
     // Variables para las sugerencias
     private JButton sugerenciaActual = null; //para el botón que se está sugiriendo
+    private JButton regresarAlMenu = null;
     private Timer parpadeoTimer;    //parpadeo del boton sugerido
     private boolean resaltado = false;  //controla si esta encendido o apagado el parpadeo
 
@@ -26,14 +27,22 @@ public class ModoManual extends JFrame { //ventana donde se mostrará el modo ma
     // Configuración de la ventana
     public ModoManual() {
         setTitle("8-Puzzle - Modo Manual");
-        setSize(300, 300);
+        setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Configuración del botón de sugerir movimiento
+        JPanel panelButtons = new JPanel(new GridLayout(2, 2));// Crea el panel para poner los botones
+        add(panelButtons, BorderLayout.SOUTH);
+
+        //Configuración del botón de sugerir movimiento
         JButton sugerenciaBtn = new JButton("Sugerir Movimiento"); // boton para las sugerencias
         sugerenciaBtn.addActionListener(e -> sugerirMovimientoBranchAndBound()); // evento que llama al metodo de sugerir
-        add(sugerenciaBtn, BorderLayout.SOUTH); // se añade el boton en la parte de abajo
+        panelButtons.add(sugerenciaBtn, BorderLayout.SOUTH); // se añade el boton en la parte de abajo
+
+        //Configurción del botón de regresar al menu
+        JButton regresarBtn = new JButton("Regresar");
+        regresarBtn.addActionListener(e -> {setVisible(false); SwingUtilities.invokeLater(Menu_Principal::new);}); //cierra la pantalla del juego e invoca al menu
+        panelButtons.add(regresarBtn, BorderLayout.SOUTH);
 
 
         // Configuración visual del tablero
@@ -55,7 +64,6 @@ public class ModoManual extends JFrame { //ventana donde se mostrará el modo ma
 
         mezclarTablero(100); // 100 movimientos aleatorios  validos
         actualizarTablero(); //actualiza visualmete el tablero
-
         add(panel); // añade el panel a la ventana
         setVisible(true); //lo hace visible
     }
