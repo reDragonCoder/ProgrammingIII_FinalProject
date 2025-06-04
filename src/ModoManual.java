@@ -49,7 +49,6 @@ public class ModoManual extends JFrame {
         JPanel panel = new JPanel(new GridLayout(3, 3)); // Crea el panel para poner los botones
         Font fuente = new Font("Arial", Font.BOLD, 28); // añade caracteristicas
 
-
         // Crea los botones dentro del panel
         for (int i = 0; i < 3; i++) {  //guarda la posicion i y la j
             for (int j = 0; j < 3; j++) {
